@@ -1,721 +1,1063 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
+  <meta name="google-site-verification" content="ftFOlJETX-2KNjaPh8W6s8lhigItRuu9fOmjHZZ0nY0" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="OlaWod">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>FreeVC Demo Page</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- Custom styles for this template -->
-    <link href="css/clean-blog.css" rel="stylesheet">
-	
-	<link rel="stylesheet" href="./css/fontawesome.all.min.css">
-	
-	<script defer src="./js/fontawesome.all.min.js"></script>
-	<!-- Bootstrap core JavaScript -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
-	<!-- Custom scripts for this template -->
-	<script src="js/clean-blog.js"></script>
-	<script src="js/interp.js"></script>
-
+  <title>Disentanglement of Emotional Style and Speaker Identity for Expressive Voice Conversion* </title>
 </head>
+<style type="text/css">
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
 
-<body id="page-top">
+  audio {
+    width: 100%;
+  }
 
-	<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
-		<div class="container">
-			<a class="navbar-brand js-scroll-trigger" href="#page-top">FreeVC</a>
-			<button class="navbar-toggler navbar-toggler-right font-weight-bold text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#abstract">Abstract</a>
-					<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#sr">Spectrogram-Resize</a></li>
-					<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#s2s">Seen-to-Seen</a></li>
-					<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#u2s">Unseen-to-Seen</a></li>
-					<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#u2u">Unseen-to-Unseen</a></li>
-					<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#exp">Others</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+  thead>tr>th:first-child {
+    width: 96px;
+  }
 
-    <!-- Page Header -->
-    <header class="masthead" style="background-image: url('img/home-bg.jpg')">
-        <div class="container" style="padding-bottom:10px">
-            <div class="row">
-                <div class="col-lg-10 col-md-10 mx-auto">
-                    <div class="site-heading">
-                        <h1>FreeVC Demo</h1>
-                        <span class="subheading">
-                            FREEVC: TOWARDS HIGH-QUALITY TEXT-FREE ONE-SHOT VOICE CONVERSION
-                        </span>
-                    </div>
-                </div>
-            </div>
-			
-            <div class="text-center">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2210.15418" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf fa-inverse"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/OlaWod/FreeVC" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github fa-inverse"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-            </div>
-			
+  @media (max-width: 767px) {
+    .big-screen {
+      display: none;
+    }
+  }
+
+  @media (min-width: 767px) {
+    .small-screen {
+      display: none;
+    }
+  }
+</style>
+
+<body>
+  <header class="header">
+    <div class="jumbotron bg-secondary text-center">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <h1><a class="text-light"> Disentanglement of Emotional Style and Speaker Identity for Expressive Voice Conversion </h1>
+            <font size=3><span style="color:#000000">(This work was accepted by Interspeech 2022)<br><br>
+             <font size=5><span style="color:#FFFFFF"> Zongyang Du<sup> 1,2</sup>, Berrak Sisman<sup> 1</sup>, Kun Zhou<sup> 2</sup>, Haizhou  Li<sup> 2,3</sup> </br>
+             <font size=3><span style="color:#000000"> zongyang_du@mymail.sutd.edu.sg &nbsp berrak_sisman@sutd.edu.sg &nbsp zhoukun@u.nus.edu  &nbsp haizhouli@cuhk.edu.cn
+             </font><font size=4> <br> <br> <sup>1</sup>  Singapore University of Technology and Design, Singapore  <br> <sup>2</sup>  National University of Singapore, Singapore <br><sup>3</sup> The Chinese University of Hong Kong (Shenzhen), China  <br> <sup></font>  </a>  
+
+            <p>
+              <div class="row">
+              </div>
+            </p>
+            
+          </div>
         </div>
-    </header>
-
-    <!-- Main Content -->
+      </div>
+    </div>
+  </header>
+  <main>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-14 col-md-12 mx-auto">
-                <div class="post-preview" id="abstract">
-                    <h2 class="post-title">
-                        Abstract
-                    </h2>
-                    <p>
-                        Voice conversion (VC) can be achieved by first extracting source content information and target speaker information, and then reconstructing waveform with these information. However, current approaches normally either extract dirty content information with speaker information leaked in, or demand a large amount of annotated data for training. Besides, the quality of reconstructed waveform can be degraded by the mismatch between conversion model and vocoder. In this paper, we adopt the end-to-end framework of VITS for high-quality waveform reconstruction, and propose strategies for clean content information extraction without text annotation. We disentangle content information by imposing an information bottleneck to WavLM features, and propose the spectrogram-resize based data augmentation to improve the purity of extracted content information. Experimental results show that the proposed method outperforms the latest VC models trained with annotated data and has greater robustness.
-						
-					</p>
-                </div>
-				
-				<div class="post-preview" id="sr">
-                    <h2 class="post-title">
-                        Spectrogram-Resize
-                    </h2>
+      <div class="row" id="result">
+        <div class="col-md-12">
+           <figcaption style="text-align:justify;"></font><font size=3> 
+          <b>Abstract</b>: Expressive voice conversion performs identity conversion for emotional speakers by jointly converting speaker identity and emotional style. Due to the hierarchical structure of speech emotion, it is challenging to disentangle the emotional style for different speakers. Inspired by the recent success of speaker disentanglement with variational autoencoder (VAE), we propose an any-to-any expressive voice conversion framework, that is called StyleVC. StyleVC is designed to disentangle linguistic content, speaker identity, pitch, and emotional style information. We study the use of style encoder to model emotional style explicitly. At run-time, StyleVC converts both speaker identity and emotional style for arbitrary speakers. Experiments validate the effectiveness of our proposed framework in both objective and subjective evaluations.
+<br /><br />
+
+
+          <h2>--------------------------------   Model Architecture   -------------------------------</h2>
+          <br />
+                    <img src="./framework.png"   height="250" / > <p>
+                      <figcaption style="terx-align:center;"></font><font size=3> 
+                       Figure 1. An illustration of the training phase of the proposed framework, where the green boxes represent the modules that are involved in the training. </font>
+                      </figcaption><br>
+
+                   
+                  <div class="big-screen">
                     
-					<div class="hero-body">
-						<div class="content has-text-justified">
-						  <p>
-							Use the sliders below to perform vertical or horizontal spectrogram-resize operation.
-						  </p>
-						</div>
-						<div class="columns is-vcentered interpolation-panel">
-						  <div class="column">
-						    <div id="interpolation-audio-wrapper">
-							  Loading audio...
-							</div>
-							<div id="interpolation-image-wrapper">
-							  Loading image...
-							</div>
-							<div id="vertical-slider-wrapper">
-								<span>&nbsp &nbsp veritical: </span>
-								<input class="slider is-fullwidth is-large is-info"
-								   id="vertical-slider"
-								   step="2" min="68" max="92" value="80" type="range">
-								<span id="vertical-rate">1</span>
-							</div>
-							<div id="horizontal-slider-wrapper">
-							<span>horizontal: </span>
-							<input class="slider is-fullwidth is-large is-info"
-								   id="horizontal-slider"
-								   step="10" min="96" max="346" value="176" type="range">
-							<span id="horizontal-rate">1</span>
-							</div>
-						  </div>
-						</div>
-						<br/>
-						<!--/ Interpolating. -->
-					</div>
-					
-                </div>			
-				
-                <div class="post-preview">
-                    <h2 class="post-title">
-                        One-shot Voice Conversion
-                    </h2>
-                    <h3 class="post-meta" id="s2s">
-                        Seen-to-Seen
-                    </h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Source</th>
-                                <th scope="col">Target</th>
-                                <th scope="col">Conversion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                            <tr>
-                                <td>F_p335_302
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_p335_302.wav">
+                     <h2>---------------------------------   Speech Samples  ---------------------------------</h2>
+
+                  
+                    <h6> <b>Baseline:</b> VQMIVC[1] </h6>
+                    <h6> <b>Proposed Method:</b> StyleVC, an any-to-any expressive voice conversion framework.  </h6>
+	<br />
+                     <h6> The samples are from five emotions (surprise, angry, sad, happy, and neutral) and three conversion scenarios (the conversion between seen speakers, the conversion between seen and unseen speakers; the conversion between unseen speakers). </h6>
+<br />
+<h6> We provide the utterances from source speakers, denoted as <i>Source</i>; the converted utterances from baseline, , denoted as <i>VQMIVC[1]</i>; the converted utterances from our proposed method, denoted as <i>StyleVC</i>; the utterances from target speakers, denoted as <i>Target</i>. </h6>
+
+<br /><br />
+                      <table class="table">
+
+             
+                         
+                        </tr>
+                      <tbody>
+                                
+                                
+                                <tr>
+
+                                    <th></th>
+                                    <th style="text-align:center;"><font size=4>   Source</th>
+                                    <th style="text-align:center;"><font size=4>   VQMIVC[1]</th>
+                                    <th style="text-align:center;"><font size=4>   StyleVC</th>
+		    <th style="text-align:center;"><font size=4>   Target</th>
+
+                              
+                          
+                                </tr>
+		 <!-- single sentence -->
+                                                                  </tr>
+                                   <th colspan=5><font size=4><h9> Seen to Seen Speakers</h9></th>
+                               </tr>
+                                <!-- single sentence -->
+
+                                <tr>
+                                  
+                                   <th style="text-align:right;">   Surprise</th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/1_0015_001520.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>F_p253_219
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_p253_219.wav">
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/1_0015_001520_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\s2s\F_p335_302-F_p253_219_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\s2s\F_p335_302-F_p253_219.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/1_0015_001520_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\s2s\F_p335_302-F_p253_219.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/1_0017_001520.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\s2s\F_p335_302-F_p253_219.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\s2s\F_p335_302-F_p253_219.wav">
+                                  </td>
+                                                                  <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/2_0020_001731.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\s2s\F_p335_302-F_p253_219.wav">
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/2_0020_001731_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>F_p362_103
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_p362_103.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/2_0020_001731_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>M_p237_001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_p237_001.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/2_0017_001731.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\s2s\F_p362_103-M_p237_001_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\s2s\F_p362_103-M_p237_001.wav">
+                                  </td>
+                                                                  <!-- single sentence -->
+                                <tr>
+                                  <th style="text-align:right;">   Angry</th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/3_0011_000692.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\s2s\F_p362_103-M_p237_001.wav">
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/3_0011_000692_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\s2s\F_p362_103-M_p237_001.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\s2s\F_p362_103-M_p237_001.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/3_0011_000692_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\s2s\F_p362_103-M_p237_001.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/3_0013_000692.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>M_p237_001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_p237_001.wav">
+                                  </td>
+                                                                  <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                                                    <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/4_0018_000691.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>F_p335_302
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_p335_302.wav">
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/4_0018_000691_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\s2s\M_p237_001-F_p335_302_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\s2s\M_p237_001-F_p335_302.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/4_0018_000691_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\s2s\M_p237_001-F_p335_302.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/4_0014_000691.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\s2s\M_p237_001-F_p335_302.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\s2s\M_p237_001-F_p335_302.wav">
+                                  </td>
+
+														                                   
+				 <!-- single sentence -->
+                               </tr>
+                                                                                                    
+                                <!-- single sentence -->
+
+                                <tr>
+                                  <th style="text-align:right;">   Sad</th>
+                                                                    <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/5_0017_001392.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\s2s\M_p237_001-F_p335_302.wav">
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/5_0017_001392_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>M_p272_219
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_p272_219.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/5_0017_001392_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>M_p259_464
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_p259_464.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/5_0018_001392.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\s2s\M_p272_219-M_p259_464_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\s2s\M_p272_219-M_p259_464.wav">
+                                  </td>
+                                                                  <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                                                    <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/6_0011_001384.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\s2s\M_p272_219-M_p259_464.wav">
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/6_0011_001384_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\s2s\M_p272_219-M_p259_464.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\s2s\M_p272_219-M_p259_464.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/6_0011_001384_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\s2s\M_p272_219-M_p259_464.wav">
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/6_0013_001384.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
                                     </audio>
-                                </td>
-                            </tr>
-                            
-                        </tbody>
+                                  </td>
+                                                                  <!-- single sentence -->
+                                     <tr>
+                                  <th style="text-align:right;">   Happy</th>  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/7_0020_000880.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/7_0020_000880_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/7_0020_000880_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/7_0017_000880.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                <!-- single sentence -->
+
+     		<tr>
+                                  <th scope="row">  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/8_0011_000967.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/8_0011_000967_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/8_0011_000967_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/8_0013_000967.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td><!-- single sentence -->
+
+     		<tr>
+                                  <th style="text-align:right;">   Neutral</th>  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/9_0018_000336.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/9_0018_000336_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/9_0018_000336_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/9_0014_000336.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td><!-- single sentence -->
+
+     		<tr>
+                                  <th scope="row">  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/10_0013_000331.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/10_0013_000331_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/10_0013_000331_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/10_0015_000331.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                                                 </tr>
+                                  <th colspan=3><font size=4><h8>Seen to Unseen Speakers</h8></th>
+                                                             </tr>
+                                <!-- single sentence -->
+
+                                <tr>
+                                  
+                                   <th style="text-align:right;">   Surprise</th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/11_0020_001748.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/11_0020_001748_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/11_0020_001748_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/11_0016_001748.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/12_0020_001731.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/12_0020_001731_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/12_0020_001731_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/12_0016_001731.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+                                <tr>
+                                  <th style="text-align:right;">   Angry</th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/13_0020_000683.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/13_0020_000683_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/13_0020_000683_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/13_0016_000683.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                                                    <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/14_0020_000690.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/14_0020_000690_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/14_0020_000690_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/14_0012_000690.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+														                                   
+				 <!-- single sentence -->
+                               </tr>
+                                                                                                    
+                                <!-- single sentence -->
+
+                                <tr>
+                                  <th style="text-align:right;">   Sad</th>
+                                                                    <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/15_0020_001386.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/15_0020_001386_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/15_0020_001386_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/15_0012_001386.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                                                    <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/16_0017_001385.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/16_0017_001385_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/16_0017_001385_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/16_0012_001385.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+                                     <tr>
+                                  <th style="text-align:right;">   Happy</th>  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/17_0018_001037.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/17_0018_001037_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/17_0018_001037_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/17_0016_001037.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                <!-- single sentence -->
+
+     		<tr>
+                                  <th scope="row">  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/18_0018_001040.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/18_0018_001040_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/18_0018_001040_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/18_0016_001040.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td><!-- single sentence -->
+
+     		<tr>
+                                  <th style="text-align:right;">   Neutral</th>  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/19_0014_000337.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/19_0014_000337_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/19_0014_000337_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/19_0012_000337.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td><!-- single sentence -->
+
+     		<tr>
+                                  <th scope="row">  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/20_0014_000095.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/20_0014_000095_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/20_0014_000095_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/20_0012_000095.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+			<tr>
+			
+		<th colspan=3><font size=4><h8>Unseen to Unseen Speakers</h8></th>
+
+
+                                <!-- single sentence -->
+
+                                <tr>
+                                  
+                                   <th style="text-align:right;">   Surprise</th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/21_0012_001464.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/21_0012_001464_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/21_0012_001464_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/21_0016_001464.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/22_0012_001467.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/22_0012_001467_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/22_0012_001467_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/22_0016_001467.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+                                <tr>
+                                  <th style="text-align:right;">   Angry</th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/23_0016_000411.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/23_0016_000411_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/23_0016_000411_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/23_0012_000411.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                                                    <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/24_0016_000405.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/24_0016_000405_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/24_0016_000405_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/24_0012_000405.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+														                                   
+				 <!-- single sentence -->
+                               </tr>
+                                                                                                    
+                                <!-- single sentence -->
+
+                                <tr>
+                                  <th style="text-align:right;">   Sad</th>
+                                                                    <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/25_0016_001097.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/25_0016_001097_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/25_0016_001097_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/25_0012_001097.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+
+                                <tr>
+                                  <th scope="row">    </th>
+                                                                    <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/26_0016_001100.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/26_0016_001100_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/26_0016_001100_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/26_0012_001100.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                  <!-- single sentence -->
+                                     <tr>
+                                  <th style="text-align:right;">   Happy</th>  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/27_0012_000750.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/27_0012_000750_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/27_0012_000750_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/27_0016_000750.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                <!-- single sentence -->
+
+     		<tr>
+                                  <th scope="row">  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/28_0012_000755.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/28_0012_000755_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/28_0012_000755_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/28_0016_000755.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td><!-- single sentence -->
+
+     		<tr>
+                                  <th style="text-align:right;">   Neutral</th>  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/29_0016_000054.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/29_0016_000054_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/29_0016_000054_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/29_0012_000054.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td><!-- single sentence -->
+
+     		<tr>
+                                  <th scope="row">  </th>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Source/30_0016_000051.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/VQMIVC/30_0016_000051_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Proposed/30_0016_000051_gen.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                  <td>
+                                    <audio controls>
+                                      <source src="./Sample/Target/30_0012_000051.wav" type="audio/wav" />
+                                      Your browser does not support the audio element.
+                                    </audio>
+                                  </td>
+                                                                                                 </tr>
+                                                                                            
+
+                      </tbody>
+                       
+
                     </table>
-					<hr>
-					<h3 class="post-meta" id="u2s">
-                        Unseen-to-Seen
-                    </h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Source</th>
-                                <th scope="col">Target</th>
-                                <th scope="col">Conversion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                            <tr>
-                                <td>F_5142_36377_000004_000012
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_5142_36377_000004_000012.wav">
-                                    </audio>
-                                </td>
-                                <td>F_p253_219
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_p253_219.wav">
-                                    </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\u2s\F_5142_36377_000004_000012-F_p253_219_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\u2s\F_5142_36377_000004_000012-F_p253_219.wav">
-                                    </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\u2s\F_5142_36377_000004_000012-F_p253_219.wav">
-                                    </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\u2s\F_5142_36377_000004_000012-F_p253_219.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\u2s\F_5142_36377_000004_000012-F_p253_219.wav">
-                                    </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\u2s\F_5142_36377_000004_000012-F_p253_219.wav">
-                                    </audio>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>F_8463_287645_000023_000001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_8463_287645_000023_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>M_p237_001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_p237_001.wav">
-                                    </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\u2s\F_8463_287645_000023_000001-M_p237_001_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\u2s\F_8463_287645_000023_000001-M_p237_001.wav">
-                                    </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\u2s\F_8463_287645_000023_000001-M_p237_001.wav">
-                                    </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\u2s\F_8463_287645_000023_000001-M_p237_001.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\u2s\F_8463_287645_000023_000001-M_p237_001.wav">
-                                    </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\u2s\F_8463_287645_000023_000001-M_p237_001.wav">
-                                    </audio>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>M_1320_122617_000013_000001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_1320_122617_000013_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>F_p335_302
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_p335_302.wav">
-                                    </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\u2s\M_1320_122617_000013_000001-F_p335_302_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\u2s\M_1320_122617_000013_000001-F_p335_302.wav">
-                                    </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\u2s\M_1320_122617_000013_000001-F_p335_302.wav">
-                                    </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\u2s\M_1320_122617_000013_000001-F_p335_302.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\u2s\M_1320_122617_000013_000001-F_p335_302.wav">
-                                    </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\u2s\M_1320_122617_000013_000001-F_p335_302.wav">
-                                    </audio>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>M_5105_28233_000016_000001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_5105_28233_000016_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>M_p259_464
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_p259_464.wav">
-                                    </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\u2s\M_5105_28233_000016_000001-M_p259_464_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\u2s\M_5105_28233_000016_000001-M_p259_464.wav">
-                                    </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\u2s\M_5105_28233_000016_000001-M_p259_464.wav">
-                                    </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\u2s\M_5105_28233_000016_000001-M_p259_464.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\u2s\M_5105_28233_000016_000001-M_p259_464.wav">
-                                    </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\u2s\M_5105_28233_000016_000001-M_p259_464.wav">
-                                    </audio>
-                                </td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-					<hr>
-					<h3 class="post-meta" id="u2u">
-                        Unseen-to-Unseen
-                    </h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Source</th>
-                                <th scope="col">Target</th>
-                                <th scope="col">Conversion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                            <tr>
-                                <td>F_3575_170457_000032_000001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_3575_170457_000032_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>M_5105_28233_000016_000001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_5105_28233_000016_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\u2u\F_3575_170457_000032_000001-M_5105_28233_000016_000001_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\u2u\F_3575_170457_000032_000001-M_5105_28233_000016_000001.wav">
-                                    </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\u2u\F_3575_170457_000032_000001-M_5105_28233_000016_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\u2u\F_3575_170457_000032_000001-M_5105_28233_000016_000001.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\u2u\F_3575_170457_000032_000001-M_5105_28233_000016_000001.wav">
-                                    </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\u2u\F_3575_170457_000032_000001-M_5105_28233_000016_000001.wav">
-                                    </audio>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>F_8463_287645_000023_000001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_8463_287645_000023_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>F_3575_170457_000032_000001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_3575_170457_000032_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\u2u\F_8463_287645_000023_000001-F_3575_170457_000032_000001_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\u2u\F_8463_287645_000023_000001-F_3575_170457_000032_000001.wav">
-                                    </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\u2u\F_8463_287645_000023_000001-F_3575_170457_000032_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\u2u\F_8463_287645_000023_000001-F_3575_170457_000032_000001.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\u2u\F_8463_287645_000023_000001-F_3575_170457_000032_000001.wav">
-                                    </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\u2u\F_8463_287645_000023_000001-F_3575_170457_000032_000001.wav">
-                                    </audio>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>M_5105_28233_000016_000001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_5105_28233_000016_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>M_1320_122617_000013_000001
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_1320_122617_000013_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\u2u\M_5105_28233_000016_000001-M_1320_122617_000013_000001_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\u2u\M_5105_28233_000016_000001-M_1320_122617_000013_000001.wav">
-                                    </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\u2u\M_5105_28233_000016_000001-M_1320_122617_000013_000001.wav">
-                                    </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\u2u\M_5105_28233_000016_000001-M_1320_122617_000013_000001.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\u2u\M_5105_28233_000016_000001-M_1320_122617_000013_000001.wav">
-                                    </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\u2u\M_5105_28233_000016_000001-M_1320_122617_000013_000001.wav">
-                                    </audio>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>M_908_31957_000018_000000
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\M_908_31957_000018_000000.wav">
-                                    </audio>
-                                </td>
-                                <td>F_5142_36377_000004_000012
-                                    <audio controls preload="none">
-                                        <source src="data\wavs\F_5142_36377_000004_000012.wav">
-                                    </audio>
-                                </td>
-                                <td>
-									VQMIVC
-                                    <audio controls preload="none">
-                                        <source src="data/vqmivc\u2u\M_908_31957_000018_000000-F_5142_36377_000004_000012_gen.wav">
-                                    </audio> 
-									BNE-PPG-VC
-                                    <audio controls preload="none">
-                                        <source src="data/bne-ppg-vc\u2u\M_908_31957_000018_000000-F_5142_36377_000004_000012.wav">
-                                    </audio>
-									YourTTS
-                                    <audio controls preload="none">
-                                        <source src="data/yourtts\u2u\M_908_31957_000018_000000-F_5142_36377_000004_000012.wav">
-                                    </audio>
-                                </td>
-                                <td>
-								    FreeVC
-                                    <audio controls preload="none">
-                                        <source src="data/freevc\u2u\M_908_31957_000018_000000-F_5142_36377_000004_000012.wav">
-                                    </audio> 
-									FreeVC (w/o SR)
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-sr\u2u\M_908_31957_000018_000000-F_5142_36377_000004_000012.wav">
-                                    </audio>
-									FreeVC-s
-                                    <audio controls preload="none">
-                                        <source src="data/freevc-spk\u2u\M_908_31957_000018_000000-F_5142_36377_000004_000012.wav">
-                                    </audio>
-                                </td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
-                <hr>
-				
-				<div class="post-preview" id="exp">
-                    <h2 class="post-title">
-                        Additional Experiments
-                    </h2>
-                    <p>
-						We also conduct objective experiments to other models that are not listed in the paper. 
-						We randomly select 400 utterances (200 from VCTK, 200 from LibriTTS) as source speech, 
-						and 12 speakers (6 seen, 6 unseen) as target speaker. 
-						The results are shown below.
-					</p>
-					<img src="data/exp/model.png">
-					<img src="data/exp/exp1.png">
-					<img src="data/exp/exp2.png">
-                </div>
-				<hr>
-				
-            </div>
+
+ </div>
+
+[1] Wang, Disong, et al. "VQMIVC: Vector Quantization and Mutual Information-Based Unsupervised Speech Representation Disentanglement for One-shot Voice Conversion." arXiv preprint arXiv:2106.10132 (2021).
+<p>
+
+
+
+
+
+                  </div>
+                 
         </div>
-		</div>
-
-
+      </div>
+      <hr>
+      <div class="row" id="ref">
+        <div class="col">
+          <!--<h2>References</h2>
+          
+         -->
+        </div>
+      </div>
+      <hr>
+      <!-- <div class="row" id="contact">
+          <div class="col">
+            <h2>Contact</h2>
+            <div></div>
+          </div>
+        </div> -->
+    </div>
+  </main>
+  <footer class="bg-secondary text-light mt-4 pt-3 pb-2 ">
+    <div class="container">
+      <p class="text-center">
+        
+      </p>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
-
